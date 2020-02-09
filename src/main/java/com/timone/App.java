@@ -6,7 +6,9 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import com.timeone.concurrent.concurrent.WriteTask;
+import com.timone.concurrent.WriteTask;
+import com.timone.services.IService;
+import com.timone.services.Service;
 
 /**
  * Hello world!

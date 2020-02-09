@@ -10,8 +10,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import com.timone.IService;
-import com.timone.Service;
+import com.timone.services.IService;
+import com.timone.services.Service;
 
 @RunWith(Parameterized.class)
 public class ServiceTest {
