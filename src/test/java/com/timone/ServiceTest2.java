@@ -3,8 +3,6 @@ package com.timone;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.timone.services.IService;
-import com.timone.services.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
