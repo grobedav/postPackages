@@ -11,7 +11,7 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
-public class ServiceTest2 {
+public class OtherServiceTest {
 
 	public static final String ZIP_CODE = "73572";
 	public static final String ZIP_CODE1 = "73571";
