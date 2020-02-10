@@ -3,11 +3,15 @@ package com.timone;
 import org.junit.Before;
 import org.junit.Test;
 
+import junit.framework.TestCase;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -26,9 +30,10 @@ public class ServiceTest2 {
 	@Before
 	public void setUp() throws Exception {
 		service = new Service();
-		ClassLoader classLoader = getClass().getClassLoader();
-		String fileName = classLoader.getResource("fees.txt").getFile();
-		service.readFile(fileName);
+		URI uri = ClassLoader.getSystemResource("").toURI();
+		String mainPath = Paths.get(uri).toString();
+		Path path = Paths.get(mainPath ,"fees.txt");
+		service.readFile(path);
 	}
 
 	@Test

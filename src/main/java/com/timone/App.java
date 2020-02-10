@@ -1,5 +1,6 @@
 package com.timone;
 
+import java.nio.file.Paths;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -45,7 +46,7 @@ public class App {
 			} else if (values.length == 3) {
 				try {
 					service.addData(values[1], values[0]);
-					service.readFile(values[2]);
+					service.readFile(Paths.get(values[2]));
 				} catch (RuntimeException e) {
 					System.out.println(e.getMessage());
 				}

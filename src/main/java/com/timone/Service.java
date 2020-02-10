@@ -3,6 +3,7 @@ package com.timone;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.Map.Entry;
@@ -97,12 +98,12 @@ public class Service implements IService {
 	}
 
 	@Override
-	public void readFile(String fileName) throws RuntimeException {
+	public void readFile(Path fileName) throws RuntimeException {
 		synchronized (fees) {
 			fees.clear();
 			List<String> lines = Collections.emptyList();
 			try {
-				lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
+				lines = Files.readAllLines(fileName, StandardCharsets.UTF_8);
 				for (String line : lines) {
 					String[] values = line.split(" ");
 					if (values.length != 2) {
