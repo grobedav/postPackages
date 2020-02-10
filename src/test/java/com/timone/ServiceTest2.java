@@ -1,25 +1,15 @@
 package com.timone;
 
-import org.junit.Before;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
-import junit.framework.TestCase;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.ResourceBundle;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Before;
+import org.junit.Test;
 
 public class ServiceTest2 {
 

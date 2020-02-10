@@ -11,7 +11,7 @@ public interface IService {
 	boolean isValidFee(String fee);
 	boolean isEmptyFees();
 	double getFee(Double weight);
-	void addData(String zipCode, String weight) throws RuntimeException;
+	void addData(String zipCode, String weight);
 	Map<String, Double> getTotalFees();
-	void readFile(Path fileName) throws RuntimeException;
+	void readFile(Path fileName);
 }

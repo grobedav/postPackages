@@ -1,7 +1,6 @@
 package com.timone;
 
 import java.util.Map;
-import com.timone.IService;
 
 public class WriteTask implements Runnable {
 	private IService service;

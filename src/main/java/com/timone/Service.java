@@ -10,6 +10,8 @@ import java.util.Map.Entry;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.management.RuntimeErrorException;
+
 public class Service implements IService {
 	private Pattern forWeight = Pattern.compile("^([0-9]|[1-9][0-9]|[1-9][0-9][0-9])(\\.\\d{1,3})?$");
 	private Pattern forFee = Pattern.compile("^([0-9]|[1-9][0-9]|[1-9][0-9][0-9])(\\.\\d{1,2})?$");
@@ -54,7 +56,7 @@ public class Service implements IService {
 
 	@Override
 	public Map<String, Double> getTotalFees() {
-		Map<String, Double> countFees = new HashMap<String, Double>();
+		Map<String, Double> countFees = new HashMap<>();
 		if (fees.isEmpty()) {
 			throw new UnsupportedOperationException("Fees for weight do not exist, define them first!");
 		}
@@ -71,14 +73,14 @@ public class Service implements IService {
 	}
 
 	@Override
-	public void addData(String zipCode, String weight) throws RuntimeException {
+	public void addData(String zipCode, String weight)  {
 		if (!isValidWeight(weight)) {
-			throw new RuntimeException(
+			throw new PostRuntimeException(
 					"weight should be: positive number, >0 and <1000, maximal 3 decimal places, . (dot) as decimal separator");
 
 		}
 		if (!isValidZipCode(zipCode)) {
-			throw new RuntimeException("postal code should be: fixed 5 digits");
+			throw new PostRuntimeException("postal code should be: fixed 5 digits");
 		}
 		addData(zipCode, Double.parseDouble(weight));
 	}
@@ -90,7 +92,7 @@ public class Service implements IService {
 			value.add(weight);
 			return value;
 		});
-		totalFees.computeIfAbsent(zipCode, (k) -> {
+		totalFees.computeIfAbsent(zipCode, k -> {
 			List<Double> v = new ArrayList<>();
 			v.add(weight);
 			return v;
@@ -98,7 +100,7 @@ public class Service implements IService {
 	}
 
 	@Override
-	public void readFile(Path fileName) throws RuntimeException {
+	public void readFile(Path fileName)  {
 		synchronized (fees) {
 			fees.clear();
 			List<String> lines = Collections.emptyList();
@@ -108,23 +110,23 @@ public class Service implements IService {
 					String[] values = line.split(" ");
 					if (values.length != 2) {
 						fees.clear();
-						throw new RuntimeException("Every line should have just two parameters");
+						throw new PostRuntimeException("Every line should have just two parameters");
 					}
 					if (!isValidWeight(values[0])) {
 						fees.clear();
-						throw new RuntimeException(
+						throw new PostRuntimeException(
 								"weight should be: positive number, >0 and <1000, maximal 3 decimal places, . (dot) as decimal separator");
 					}
 					if (!isValidFee(values[1])) {
 						fees.clear();
-						throw new RuntimeException(
+						throw new PostRuntimeException(
 								"fee should be: positive number, >0 and <1000, maximal 2 decimal places, . (dot) as decimal separator");
 					}
 					fees.put(Double.valueOf(values[0]), Double.valueOf(values[1]));
 				}
 			} catch (IOException e) {
 				fees.clear();
-				new RuntimeException(e.getMessage());
+				throw new PostRuntimeException(e.getMessage());
 			}
 		}
 	}

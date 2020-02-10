@@ -10,10 +10,12 @@ import java.util.concurrent.TimeUnit;
 
 
 /**
- * Hello world!
+ * 
  *
  */
 public class App {
+	private static final String QUIT = "quit";
+
 	public static void main(String[] args) {
 		IService service = new Service();
 		ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
@@ -28,7 +30,7 @@ public class App {
 			String line = scanner.nextLine(); // Read user input
 			System.out.println();
 
-			if ("quit".equalsIgnoreCase(line)) {
+			if (QUIT.equalsIgnoreCase(line)) {
 				scheduledFuture.cancel(true);
 				executor.shutdown();
 				scanner.close();
