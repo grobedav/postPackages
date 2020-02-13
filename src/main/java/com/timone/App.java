@@ -7,8 +7,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-
-
 /**
  * 
  *
@@ -22,8 +20,8 @@ public class App {
 		ScheduledFuture<?> scheduledFuture = executor.scheduleAtFixedRate(new WriteTask(service), 60, 60,
 				TimeUnit.SECONDS);
 
+		Scanner scanner = new Scanner(System.in); // Create a Scanner object
 		while (true) {
-			Scanner scanner = new Scanner(System.in); // Create a Scanner object
 			System.out.println("Enter weight of package and destination postal code separated by space.");
 			System.out.println("Example 10.24 73301");
 			System.out.println("Or 10.24 73301 fees.txt");
